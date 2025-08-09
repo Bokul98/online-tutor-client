@@ -63,7 +63,12 @@ const Navbar = () => {
     );
 
     return (
-        <header className={`sticky top-0 z-50 w-full backdrop-blur-lg shadow-sm theme-navbar-bg transition-all duration-300`}>
+        <header
+            className={`sticky top-0 z-50 w-full backdrop-blur-lg shadow-sm transition-all duration-300 ${isDark
+                    ? "bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-900 border-b border-slate-700"
+                    : "bg-gradient-to-r from-indigo-50 via-white to-slate-50"
+                }`}
+        >
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16 w-full">
                     {/* Logo and Brand */}
