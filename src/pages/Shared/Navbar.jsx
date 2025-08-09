@@ -10,12 +10,12 @@ const Navbar = () => {
 
     const getNavLinkStyle = ({ isActive }) => `
         px-4 py-2 rounded-lg transition-all duration-300 font-medium relative
-        ${isActive 
-            ? `${isDark ? 'text-blue-300 bg-blue-900/20' : 'text-blue-600 bg-blue-100/50'} 
-               lg:theme-text-secondary lg:${isDark ? 'bg-blue-900/20' : 'bg-blue-100/50'} 
-               lg:after:content-[''] lg:after:absolute lg:after:bottom-0 lg:after:left-1/2 lg:after:-translate-x-1/2 
+        ${isActive
+            ? `lg:after:content-[''] lg:after:absolute lg:after:bottom-0 lg:after:left-1/2 lg:after:-translate-x-1/2
                lg:after:w-1/2 lg:after:h-0.5 ${isDark ? 'lg:after:bg-blue-300' : 'lg:after:bg-blue-600'}`
             : `theme-text-secondary`}
+        ${isActive && !isDark ? 'text-blue-600' : ''}
+        ${isActive && isDark ? 'text-blue-300 bg-blue-900/20' : ''}
     `;
 
     // Public routes
@@ -69,26 +69,24 @@ const Navbar = () => {
                     {/* Logo and Brand */}
                     <div className="flex items-center gap-2">
                         <Link to="/" className="flex items-center gap-2 group">
-                            <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#00C6FF] to-[#0072FF] bg-clip-text text-transparent 
+                            <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#00C6FF] to-[#0072FF] bg-clip-text text-transparent
                                 group-hover:scale-105 transition-transform duration-300">
                                 LangLink
                             </span>
                         </Link>
                     </div>
-
                     {/* Desktop Nav */}
                     <div className="hidden lg:flex items-center gap-6">
                         <ul className="flex gap-3 items-center text-sm font-medium">
                             {navLinks}
                         </ul>
                     </div>
-
                     {/* Right Side: Theme, User, Login */}
                     <div className="flex items-center gap-3">
                         {/* Theme Toggle */}
                         <button
                             onClick={toggleTheme}
-                            className={`p-2 rounded-full theme-hover-bg hover:scale-110 transition-all duration-300 
+                            className={`p-2 rounded-full theme-hover-bg hover:scale-110 transition-all duration-300
                                 ${isDark ? 'hover:bg-blue-900/30' : 'hover:bg-blue-100'}`}
                             title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
                         >
@@ -102,19 +100,18 @@ const Navbar = () => {
                                 </svg>
                             )}
                         </button>
-
                         {!user ? (
                             <>
-                                <Link to="/login" 
-                                    className="px-4 py-2 rounded-full font-semibold text-sm text-white 
-                                        bg-gradient-to-r from-[#00C6FF] to-[#0072FF] 
-                                        hover:from-[#0072FF] hover:to-[#00C6FF] 
+                                <Link to="/login"
+                                    className="px-4 py-2 rounded-full font-semibold text-sm text-white
+                                        bg-gradient-to-r from-[#00C6FF] to-[#0072FF]
+                                        hover:from-[#0072FF] hover:to-[#00C6FF]
                                         hover:scale-105 transition-all duration-300 shadow-md">
                                     Login
                                 </Link>
-                                <Link to="/register" 
-                                    className="px-4 py-2 rounded-full font-semibold text-sm border 
-                                        ${isDark ? 'border-blue-300 text-blue-300 hover:bg-blue-300/10' : 'border-blue-600 text-blue-600 hover:bg-blue-600/10'} 
+                                <Link to="/register"
+                                    className="px-4 py-2 rounded-full font-semibold text-sm border
+                                        ${isDark ? 'border-blue-300 text-blue-300 hover:bg-blue-300/10' : 'border-blue-600 text-blue-600 hover:bg-blue-600/10'}
                                         hover:scale-105 transition-all duration-300">
                                     Sign Up
                                 </Link>
@@ -126,12 +123,12 @@ const Navbar = () => {
                                         <img
                                             src={user.photoURL && user.photoURL.trim() !== "" ? user.photoURL : avaterImg}
                                             alt="User Avatar"
-                                            className="w-9 h-9 object-cover rounded-full border-2 
+                                            className="w-9 h-9 object-cover rounded-full border-2
                                                 ${isDark ? 'border-blue-300' : 'border-blue-600'}"
                                             onError={(e) => { e.target.src = avaterImg; }}
                                         />
                                     </label>
-                                    <ul tabIndex={0} className={`mt-3 z-[1] p-3 shadow-lg menu menu-sm dropdown-content 
+                                    <ul tabIndex={0} className={`mt-3 z-[1] p-3 shadow-lg menu menu-sm dropdown-content
                                         theme-card-bg rounded-xl w-44 border ${isDark ? 'border-blue-900' : 'border-blue-200'}`}>
                                         <li className="flex flex-col items-center py-2">
                                             <span className="font-bold text-sm bg-gradient-to-r from-[#00C6FF] to-[#0072FF] bg-clip-text text-transparent">
@@ -140,9 +137,9 @@ const Navbar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <button onClick={logout} 
-                                    className="px-3 py-2 rounded-full font-semibold text-sm 
-                                        bg-red-500 text-white hover:bg-red-600 hover:scale-105 
+                                <button onClick={logout}
+                                    className="px-3 py-2 rounded-full font-semibold text-sm
+                                        bg-red-500 text-white hover:bg-red-600 hover:scale-105
                                         transition-all duration-300 flex items-center gap-1 shadow-md">
                                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
@@ -151,7 +148,6 @@ const Navbar = () => {
                                 </button>
                             </div>
                         )}
-
                         {/* Mobile Hamburger */}
                         <div className="lg:hidden">
                             <input id="navbar-drawer" type="checkbox" className="drawer-toggle hidden" />
@@ -162,12 +158,12 @@ const Navbar = () => {
                             </label>
                             <div className="drawer-side z-50">
                                 <label htmlFor="navbar-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-                                <ul className={`menu p-4 w-64 min-h-full theme-bg-secondary 
+                                <ul className={`menu p-4 w-64 min-h-full theme-bg-secondary
                                     ${isDark ? 'text-blue-200' : 'text-blue-800'} flex flex-col gap-4 text-sm`}>
                                     {navLinks}
                                     <li>
                                         <button onClick={toggleTheme}
-                                            className="btn btn-ghost flex items-center gap-2 hover:bg-opacity-10 
+                                            className="btn btn-ghost flex items-center gap-2 hover:bg-opacity-10
                                                 ${isDark ? 'hover:bg-blue-300' : 'hover:bg-blue-600'}">
                                             {isDark ? (
                                                 <>
@@ -188,25 +184,25 @@ const Navbar = () => {
                                     </li>
                                     {!user ? (
                                         <>
-                                            <Link to="/login" 
+                                            <Link to="/login"
                                                 className="btn btn-primary text-sm rounded-full shadow-md">
                                                 Login
                                             </Link>
-                                            <Link to="/register" 
+                                            <Link to="/register"
                                                 className="btn btn-outline btn-primary text-sm rounded-full">
                                                 Sign Up
                                             </Link>
                                         </>
                                     ) : (
                                         <div className="flex items-center gap-3 mt-4">
-                                            <img 
-                                                src={user.photoURL && user.photoURL.trim() !== "" ? user.photoURL : avaterImg} 
-                                                alt="User Avatar" 
-                                                className="w-8 h-8 rounded-full border-2 
-                                                    ${isDark ? 'border-blue-300' : 'border-blue-600'}" 
+                                            <img
+                                                src={user.photoURL && user.photoURL.trim() !== "" ? user.photoURL : avaterImg}
+                                                alt="User Avatar"
+                                                className="w-8 h-8 rounded-full border-2
+                                                    ${isDark ? 'border-blue-300' : 'border-blue-600'}"
                                             />
                                             <span className="font-bold text-sm">{user.displayName}</span>
-                                            <button onClick={logout} 
+                                            <button onClick={logout}
                                                 className="btn btn-ghost text-sm flex items-center gap-1">
                                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h4a2 2 0 012 2v1" />
