@@ -31,12 +31,6 @@ const Navbar = () => {
                     Find Tutors
                 </NavLink>
             </li>
-            {/* ✅ New Public Page Link */}
-            <li className="mx-2 sm:mx-3">
-                <NavLink to="/resources" className={getNavLinkStyle}>
-                    Resources
-                </NavLink>
-            </li>
         </>
     );
 
@@ -83,7 +77,7 @@ const Navbar = () => {
                     </div>
                     {/* Desktop Nav */}
                     <div className="hidden lg:flex items-center gap-6">
-                        <ul className="flex gap-3 items-center text-sm font-medium">
+                        <ul className="flex gap-1 items-center text-sm font-medium">
                             {navLinks}
                         </ul>
                     </div>
