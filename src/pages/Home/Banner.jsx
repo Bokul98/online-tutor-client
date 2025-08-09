@@ -2,6 +2,7 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { useTheme } from '../../context/ThemeContext/ThemeContext';
+import { useNavigate } from 'react-router-dom'; // ✅ navigate hook
 
 const bannerImages = [
   {
@@ -23,6 +24,7 @@ const bannerImages = [
 
 const Banner = () => {
   const { isDark } = useTheme();
+  const navigate = useNavigate(); // ✅
 
   return (
     <section
@@ -61,12 +63,15 @@ const Banner = () => {
             key={idx}
             className="relative h-[250px] sm:h-[350px] md:h-[450px] lg:h-[550px] flex items-center justify-center banner-slide"
           >
+            {/* ডার্কেনড ইমেজ */}
             <img
               src={img.src}
               alt={img.alt}
-              className="object-cover w-full h-full brightness-75"
+              className="object-cover w-full h-full brightness-50" // আগের 75 থেকে 50 করে ডার্কার
               loading="lazy"
             />
+
+            {/* Text మరియు బటన్ */}
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
               <h2
                 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold drop-shadow-2xl mb-4 animate-fadeInUp transition-transform duration-300 hover:scale-105 bg-clip-text text-transparent ${
@@ -77,13 +82,16 @@ const Banner = () => {
               >
                 {img.caption}
               </h2>
+
+              {/* Proper Button Style */}
               <button
                 type="button"
-                className={`px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 transform hover:scale-110 ${
+                onClick={() => navigate('/resources')}
+                className={`px-6 py-2 text-sm md:text-base font-semibold rounded-full transition-all duration-300 transform hover:scale-110 animate-fadeInUp delay-200 shadow-lg hover:shadow-xl ${
                   isDark
-                    ? 'bg-blue-600 text-white hover:bg-blue-700'
-                    : 'bg-blue-500 text-white hover:bg-blue-600'
-                } animate-fadeInUp delay-200 shadow-lg hover:shadow-xl`}
+                    ? 'bg-gradient-to-r from-[#00C6FF] to-[#0072FF] text-white hover:opacity-90'
+                    : 'bg-gradient-to-r from-[#00C6FF] to-[#0072FF] text-white hover:opacity-90'
+                }`}
               >
                 Learn More
               </button>

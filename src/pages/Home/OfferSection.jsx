@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext/ThemeContext";
+import { Navigate, useNavigate } from "react-router";
 
 const OfferSection = () => {
   const { isDark } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState("hint"); // hint | loading | success
+  const navigate = useNavigate();
 
   const confirmClaim = () => {
     setStep("loading");
@@ -80,6 +82,7 @@ const OfferSection = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => navigate("/resources")}
               className={`px-8 py-4 rounded-xl font-semibold text-lg shadow-lg transition-all duration-300 ${
                 isDark
                   ? "bg-slate-700 text-gray-200 hover:bg-slate-600"
