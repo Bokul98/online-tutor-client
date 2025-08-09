@@ -31,6 +31,11 @@ const Navbar = () => {
                     Find Tutors
                 </NavLink>
             </li>
+            <li className="mx-2 sm:mx-3">
+                <NavLink to="/resources" className={getNavLinkStyle}>
+                    Resources
+                </NavLink>
+            </li>
         </>
     );
 
