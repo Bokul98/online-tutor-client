@@ -6,6 +6,8 @@ import StatsSection from './StatsSection';
 import LanguageCategorySection from './LanguageCategorySection';
 import AnimatedFeatures from './AnimatedFeatures';
 import TestimonialsSection from './TestimonialsSection';
+import OfferSection from './OfferSection';
+
 
 const Home = () => {
     return (
@@ -15,6 +17,7 @@ const Home = () => {
             <LanguageCategorySection />
             <AnimatedFeatures />
             <FeaturedTutors />
+            <OfferSection />
             <TestimonialsSection />
             <FAQSection />
         </div>
