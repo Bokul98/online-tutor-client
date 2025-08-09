@@ -32,62 +32,77 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="w-full max-w-7xl mx-auto my-8 md:my-16 px-4 md:px-8 flex flex-col items-center">
-      {/* Title Centered */}
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-[#00C6FF] to-[#0072FF] bg-clip-text text-transparent">Frequently Asked Questions</h2>
-      {/* Lottie and FAQ Row */}
-      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-8">
-        {/* Lottie Animation Left (on desktop) */}
-        <div className="w-full md:w-1/2 flex justify-center items-center md:justify-start">
-          <Lottie animationData={faqLottie} loop={true} className="max-h-80 w-full md:max-w-xs" />
-        </div>
-        {/* FAQ List Right (on desktop) */}
-        <div className="w-full md:w-1/2 flex flex-col items-center md:items-center">
-          <div className="space-y-4 w-full max-w-xl">
-            {faqs.map((faq, idx) => {
-              const isOpen = openIdx === idx;
-              return (
-                <div
-                  key={idx}
-                  className={`rounded-xl border shadow-md transition-all hover:shadow-xl flex flex-col ${
-                    isDark 
-                      ? 'theme-card-bg theme-border hover:shadow-2xl hover:shadow-slate-900/50' 
-                      : 'bg-white/80 border-blue-100'
-                  }`}
-                >
-                  <button
-                    className="flex items-center justify-between w-full text-left p-5 focus:outline-none gap-3"
-                    onClick={() => handleToggle(idx)}
-                    aria-expanded={isOpen}
-                    aria-controls={`faq-answer-${idx}`}
+    <section
+      className={`py-16 transition-all duration-300 ${
+        isDark
+          ? 'bg-gradient-to-b from-slate-900 via-slate-800 to-indigo-900'
+          : 'bg-gradient-to-b from-indigo-50 via-white to-slate-50'
+      }`}
+    >
+      {/* Body-width container */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 flex flex-col items-center">
+        {/* Title */}
+        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-[#00C6FF] to-[#0072FF] bg-clip-text text-transparent">
+          Frequently Asked Questions
+        </h2>
+
+        {/* Lottie + FAQ list */}
+        <div className="w-full flex flex-col md:flex-row items-center justify-center gap-8">
+          {/* Lottie Left */}
+          <div className="w-full md:w-1/2 flex justify-center items-center md:justify-start">
+            <Lottie animationData={faqLottie} loop={true} className="max-h-80 w-full md:max-w-xs" />
+          </div>
+
+          {/* FAQ Right */}
+          <div className="w-full md:w-1/2 flex flex-col items-center md:items-center">
+            <div className="space-y-4 w-full max-w-xl">
+              {faqs.map((faq, idx) => {
+                const isOpen = openIdx === idx;
+                return (
+                  <div
+                    key={idx}
+                    className={`rounded-xl border shadow-md transition-all hover:shadow-xl flex flex-col ${
+                      isDark
+                        ? 'theme-card-bg theme-border hover:shadow-2xl hover:shadow-slate-900/50'
+                        : 'bg-white/80 border-blue-100'
+                    }`}
                   >
-                    <span className={`text-lg md:text-xl font-bold flex items-center gap-2 transition-colors duration-300 ${
-                      isDark ? 'text-blue-400' : 'text-blue-700'
-                    }`}>
-                      <span className="inline-block w-2 h-2 rounded-full bg-gradient-to-r from-[#00C6FF] to-[#0072FF]"></span>
-                      {faq.question}
-                    </span>
-                    <span className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-[#00C6FF] to-[#0072FF] ml-4">
-                      {isOpen ? (
-                        <FiMinus className="text-white text-2xl" />
-                      ) : (
-                        <FiPlus className="text-white text-2xl" />
-                      )}
-                    </span>
-                  </button>
-                  {isOpen && (
-                    <div
-                      id={`faq-answer-${idx}`}
-                      className={`px-5 pb-5 text-base md:text-lg leading-relaxed animate-fadeIn transition-colors duration-300 ${
-                        isDark ? 'theme-text-secondary' : 'text-gray-700'
-                      }`}
+                    <button
+                      className="flex items-center justify-between w-full text-left p-5 focus:outline-none gap-3"
+                      onClick={() => handleToggle(idx)}
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-answer-${idx}`}
                     >
-                      {faq.answer}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+                      <span
+                        className={`text-lg md:text-xl font-bold flex items-center gap-2 transition-colors duration-300 ${
+                          isDark ? 'text-blue-400' : 'text-blue-700'
+                        }`}
+                      >
+                        <span className="inline-block w-2 h-2 rounded-full bg-gradient-to-r from-[#00C6FF] to-[#0072FF]"></span>
+                        {faq.question}
+                      </span>
+                      <span className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-[#00C6FF] to-[#0072FF] ml-4">
+                        {isOpen ? (
+                          <FiMinus className="text-white text-2xl" />
+                        ) : (
+                          <FiPlus className="text-white text-2xl" />
+                        )}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div
+                        id={`faq-answer-${idx}`}
+                        className={`px-5 pb-5 text-base md:text-lg leading-relaxed animate-fadeIn transition-colors duration-300 ${
+                          isDark ? 'theme-text-secondary' : 'text-gray-700'
+                        }`}
+                      >
+                        {faq.answer}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

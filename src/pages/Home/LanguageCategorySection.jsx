@@ -18,7 +18,9 @@ const LanguageCategorySection = () => {
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
-          const langSet = new Set(data.map(item => item.language && item.language.trim()).filter(Boolean));
+          const langSet = new Set(
+            data.map(item => item.language && item.language.trim()).filter(Boolean)
+          );
           setLanguages(Array.from(langSet));
         } else {
           setLanguages([]);
@@ -31,34 +33,44 @@ const LanguageCategorySection = () => {
     navigate(`/find-tutors?language=${encodeURIComponent(lang)}`);
   };
 
-  const visibleLanguages = showAll ? languages : languages.slice(0, CARDS_PER_ROW * INITIAL_ROWS);
+  const visibleLanguages = showAll
+    ? languages
+    : languages.slice(0, CARDS_PER_ROW * INITIAL_ROWS);
 
   return (
-    <section className={`py-16 transition-all duration-300 ${
-      isDark 
-        ? 'bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800' 
-        : 'bg-gradient-to-b from-blue-50 via-white to-purple-50'
-    }`}>
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className={`text-3xl font-extrabold mb-10 text-center tracking-tight transition-colors duration-300 ${
-          isDark ? 'theme-text-primary' : 'text-gray-800'
-        }`}>
+    <section
+      className={`py-16 transition-all duration-300 ${
+        isDark
+          ? 'bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800'
+          : 'bg-gradient-to-b from-blue-50 via-white to-purple-50'
+      }`}
+    >
+      {/* Unified body-width container */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <h2
+          className={`text-3xl font-extrabold mb-10 text-center tracking-tight transition-colors duration-300 ${
+            isDark ? 'theme-text-primary' : 'text-gray-800'
+          }`}
+        >
           Discover the Perfect Tutor for Your Learning Journey
         </h2>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {visibleLanguages.map((lang, idx) => (
             <div
               key={idx}
               className={`relative cursor-pointer rounded-xl transition-all duration-300 flex items-center px-6 py-4 border group ${
-                isDark 
-                  ? 'theme-card-bg theme-shadow hover:shadow-2xl hover:shadow-slate-900/50 theme-border hover:border-blue-400' 
+                isDark
+                  ? 'theme-card-bg theme-shadow hover:shadow-2xl hover:shadow-slate-900/50 theme-border hover:border-blue-400'
                   : 'bg-white shadow hover:shadow-md border-gray-200 hover:border-blue-400'
               }`}
               onClick={() => handleLanguageClick(lang)}
             >
-              <div className={`p-3 rounded-full shadow-md mr-6 flex-shrink-0 transition-colors duration-300 ${
-                isDark ? 'bg-blue-900/50' : 'bg-blue-100'
-              }`}>
+              <div
+                className={`p-3 rounded-full shadow-md mr-6 flex-shrink-0 transition-colors duration-300 ${
+                  isDark ? 'bg-blue-900/50' : 'bg-blue-100'
+                }`}
+              >
                 <img
                   src={defaultLogo}
                   alt="Category Logo"
@@ -66,22 +78,35 @@ const LanguageCategorySection = () => {
                 />
               </div>
               <div className="flex-1">
-                <div className={`text-lg font-semibold group-hover:text-blue-600 transition-colors duration-200 ${
-                  isDark ? 'theme-text-primary' : 'text-gray-800'
-                }`}>
+                <div
+                  className={`text-lg font-semibold group-hover:text-blue-600 transition-colors duration-200 ${
+                    isDark ? 'theme-text-primary' : 'text-gray-800'
+                  }`}
+                >
                   {lang}
                 </div>
               </div>
-              <span className={`inline-block rounded-full p-2 transition-colors duration-200 ml-4 ${
-                isDark 
-                  ? 'bg-blue-900/30 group-hover:bg-blue-800/50' 
-                  : 'bg-blue-50 group-hover:bg-blue-100'
-              }`}>
-                <svg className="w-6 h-6 text-blue-500 group-hover:text-blue-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+              <span
+                className={`inline-block rounded-full p-2 transition-colors duration-200 ml-4 ${
+                  isDark
+                    ? 'bg-blue-900/30 group-hover:bg-blue-800/50'
+                    : 'bg-blue-50 group-hover:bg-blue-100'
+                }`}
+              >
+                <svg
+                  className="w-6 h-6 text-blue-500 group-hover:text-blue-700"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
               </span>
             </div>
           ))}
         </div>
+
         {languages.length > CARDS_PER_ROW * INITIAL_ROWS && (
           <div className="flex justify-center mt-8">
             <button
