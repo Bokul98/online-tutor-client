@@ -65,8 +65,8 @@ const Navbar = () => {
     return (
         <header
             className={`sticky top-0 z-50 w-full backdrop-blur-lg shadow-sm transition-all duration-300 ${isDark
-                    ? "bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-900 border-b border-slate-700"
-                    : "bg-gradient-to-r from-indigo-50 via-white to-slate-50"
+                ? "bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-900 border-b border-slate-700"
+                : "bg-gradient-to-r from-indigo-50 via-white to-slate-50"
                 }`}
         >
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,8 +74,13 @@ const Navbar = () => {
                     {/* Logo and Brand */}
                     <div className="flex items-center gap-2">
                         <Link to="/" className="flex items-center gap-2 group">
-                            <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#00C6FF] to-[#0072FF] bg-clip-text text-transparent
-                                group-hover:scale-105 transition-transform duration-300">
+                            <span
+                                className={`text-xl sm:text-2xl font-bold group-hover:scale-105 transition-transform duration-300 
+    ${isDark
+                                        ? "text-white"
+                                        : "bg-gradient-to-r from-[#00C6FF] to-[#0072FF] bg-clip-text text-transparent"
+                                    }`}
+                            >
                                 LangLink
                             </span>
                         </Link>
