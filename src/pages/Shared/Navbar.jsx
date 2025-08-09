@@ -8,31 +8,53 @@ import { useTheme } from '../../context/ThemeContext/ThemeContext';
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
     const { toggleTheme, isDark } = useTheme();
-    const navLinks = (
+    const getNavLinkStyle = (isActive) => `px-4 py-2 rounded-lg transition-all duration-200 ${
+        isActive
+            ? "bg-gradient-to-r from-[#00C6FF] to-[#0072FF] text-white shadow-md"
+            : `theme-hover-bg ${isDark ? 'hover:text-blue-300' : 'hover:text-primary'}`
+    }`;
+
+    // Public routes that are always visible
+    const publicNavLinks = (
         <>
             <li className="mx-2 sm:mx-3">
-                <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                        `px-4 py-2 rounded-lg transition-all duration-200 ${isActive ? "bg-gradient-to-r from-[#00C6FF] to-[#0072FF] text-white shadow-md" : `theme-hover-bg ${isDark ? 'hover:text-blue-300' : 'hover:text-primary'}`}`
-                    }
-                >
+                <NavLink to="/" className={({ isActive }) => getNavLinkStyle(isActive)}>
                     Home
                 </NavLink>
             </li>
             <li className="mx-2 sm:mx-3">
-                <NavLink
-                    to="/find-tutors"
-                    className={({ isActive }) =>
-                        `px-4 py-2 rounded-lg transition-all duration-200 ${isActive ? "bg-gradient-to-r from-[#00C6FF] to-[#0072FF] text-white shadow-md" : `theme-hover-bg ${isDark ? 'hover:text-blue-300' : 'hover:text-primary'}`}`
-                    }
-                >
+                <NavLink to="/find-tutors" className={({ isActive }) => getNavLinkStyle(isActive)}>
                     Find Tutors
                 </NavLink>
             </li>
-            <li className="mx-2 sm:mx-3"><NavLink to="/add-tutorials" className={({ isActive }) => `px-4 py-2 rounded-lg transition-all duration-200 ${isActive ? "bg-gradient-to-r from-[#00C6FF] to-[#0072FF] text-white shadow-md" : `theme-hover-bg ${isDark ? 'hover:text-blue-300' : 'hover:text-primary'}`}`}>Add Tutorials</NavLink></li>
-            <li className="mx-2 sm:mx-3"><NavLink to="/my-tutorials" className={({ isActive }) => `px-4 py-2 rounded-lg transition-all duration-200 ${isActive ? "bg-gradient-to-r from-[#00C6FF] to-[#0072FF] text-white shadow-md" : `theme-hover-bg ${isDark ? 'hover:text-blue-300' : 'hover:text-primary'}`}`}>My Tutorials</NavLink></li>
-            <li className="mx-2 sm:mx-3"><NavLink to="/my-booked-tutors" className={({ isActive }) => `px-4 py-2 rounded-lg transition-all duration-200 ${isActive ? "bg-gradient-to-r from-[#00C6FF] to-[#0072FF] text-white shadow-md" : `theme-hover-bg ${isDark ? 'hover:text-blue-300' : 'hover:text-primary'}`}`}>My Booked Tutors</NavLink></li>
+        </>
+    );
+
+    // Private routes that are only visible after login
+    const privateNavLinks = (
+        <>
+            <li className="mx-2 sm:mx-3">
+                <NavLink to="/add-tutorials" className={({ isActive }) => getNavLinkStyle(isActive)}>
+                    Add Tutorials
+                </NavLink>
+            </li>
+            <li className="mx-2 sm:mx-3">
+                <NavLink to="/my-tutorials" className={({ isActive }) => getNavLinkStyle(isActive)}>
+                    My Tutorials
+                </NavLink>
+            </li>
+            <li className="mx-2 sm:mx-3">
+                <NavLink to="/my-booked-tutors" className={({ isActive }) => getNavLinkStyle(isActive)}>
+                    My Booked Tutors
+                </NavLink>
+            </li>
+        </>
+    );
+
+    const navLinks = (
+        <>
+            {publicNavLinks}
+            {user && privateNavLinks}
         </>
     );
     return (
